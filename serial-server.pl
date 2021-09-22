@@ -114,7 +114,7 @@ sub readPacket {
 			foreach my $char (split //, $buffer) {
 				my $binVal = ord $char;
 				push(@packet, $binVal);
-				if (compareHeader(\@headerArray, \@packet) and $binVal == ($checkSum & 255)) {
+				if (compareHeader(\@headerArray, \@packet) and $binVal == ($checkSum & 255) and scalar(@packet) == scalar(@headerArray)+$dataLength+1) {
 					last READ_LOOP;
 				}
 				$checkSum += $binVal;
